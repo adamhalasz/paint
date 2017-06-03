@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
   constructor(public http: Http) {}
 
   ngOnInit(): void {
-    this.http.get('http://localhost:8000/home-data').subscribe(response => {
+    this.http.get('http://localhost:1337/home-data').subscribe(response => {
       console.log('/data response', response);
       const data = response.json();
       this.name = data.name;

@@ -1,0 +1,14 @@
+<div id="form" class="center">
+    <h2>Create Board</h2>
+   
+    <md-input-container>
+        <input type="text" mdInput placeholder="Board Title" [(ngModel)]="title">
+    </md-input-container>
+    <br>
+
+    <div class="error" *ngIf="error">{{error}}</div>
+
+    <fieldset>
+        <button md-raised-button color="primary" (click)="create()">Create New Board</button>
+    </fieldset>
+</div>

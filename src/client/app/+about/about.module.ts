@@ -9,9 +9,6 @@ import { RouterModule } from '@angular/router';
 // routes & components
 import { routes } from './about.routes';
 import { AboutComponent } from './about.component';
-import { AboutUsComponent } from './about-us.component';
-import { AboutBananaComponent } from './about-banana.component';
-import { AboutApplePearComponent } from './about-apple-pear.component';
 
 @NgModule({
   imports: [
@@ -20,10 +17,7 @@ import { AboutApplePearComponent } from './about-apple-pear.component';
     RouterModule.forChild(routes)
   ],
   declarations: [
-    AboutComponent,
-    AboutUsComponent,
-    AboutBananaComponent,
-    AboutApplePearComponent
+    AboutComponent
   ]
 })
 export class AboutModule {

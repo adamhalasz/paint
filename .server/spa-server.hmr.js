@@ -55,16 +55,22 @@ var fruitNames = ['Apple', 'Orange', 'Banana', 'Mango', 'Kiwi', 'Apricot', 'Avoc
     price = Math.floor(Math.random() * 5) + 5; // from $5 - $10
     fruits.push({name: fruitNames[index], price: price});
   }
-server.get('/data', function(req, res){
-  console.log('Catched GET /data in HMR')
+
+server.get('/data', (req, res) => {
+  console.log('Catched GET /data in HMR');
+  res.json({
+    ok: true,
+    fruits: fruits
+  });
+});
+
+server.get('/home-data', (req, res) => {
   res.json({
     ok: true,
     name: 'John Doe',
-    items: ['knife', 'sword', 'hat', 'rope'],
-    fruits: fruits,
-    version: 1.0
-  })
-})
+    items: ['knife', 'sword', 'hat', 'rope']
+  });
+});
 
 /**
  * Catch all routes and return the `index.html`

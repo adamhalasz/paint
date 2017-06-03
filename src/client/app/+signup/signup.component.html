@@ -1,0 +1,17 @@
+<div id="form" class="center">
+    <h2>Signup</h2>
+    
+    <md-input-container>
+        <input type="text" mdInput placeholder="Username" [(ngModel)]="username">
+    </md-input-container>
+    <br>
+    <md-input-container>
+        <input type="password" mdInput placeholder="Password" [(ngModel)]="password">
+    </md-input-container>
+
+    <div class="error" *ngIf="error">{{error}}</div>
+
+    <fieldset>
+        <button md-raised-button color="primary" (click)="signup()">Signup</button>
+    </fieldset>
+</div>

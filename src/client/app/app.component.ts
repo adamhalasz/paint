@@ -10,6 +10,13 @@ import { Http } from '@angular/http';
 // external styles
 import '../assets/sass/layout.scss';
 
+import { Injectable } from '@angular/core';
+import { Socket } from 'ng2-socket-io';
+
+import { MessengerService } from './+shared/messenger.service';
+import { UserService } from './+shared/user.service';
+
+@Injectable()
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,16 +26,24 @@ export class AppComponent implements OnInit {
   title: string;
   name: string;
   fruits: Array<string> = [];
+  socketMessage: string;
 
   constructor(private readonly config: ConfigService,
               private readonly translate: TranslateService,
               private readonly meta: MetaService,
-              public http: Http) { // ,
+              public http: Http,
+              private socket: Socket,
+
+              // User Service Needs to be initialized
+              // in order to listen for login events
+              public user: UserService,
+              public messenger: MessengerService) { // ,
               // private readonly i18nRouter: I18NRouterService) {
   }
 
   ngOnInit(): void {
     this.title = 'ng-seed (universal) works!';
+    this.socketMessage = '_EMPTY_SOCKET_MESSAGE_';
     const defaultLanguage = this.config.getSettings('i18n.defaultLanguage');
 
     // add available languages & set default language
@@ -42,6 +57,17 @@ export class AppComponent implements OnInit {
 
     this.setLanguage(defaultLanguage);
 
+    this.user.authorize();
+/*
+    this.socket.on('message', data => {
+      console.log('SOCKET MESSAGE', data);
+      this.socketMessage = data;
+    });
+*/
+  }
+
+  sendMessage(): void {
+    this.socket.emit('message', '_#Yaay_');
   }
 
   private setLanguage(language: any): void {

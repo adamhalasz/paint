@@ -1,0 +1,8 @@
+{
+    "port": 9000,
+    "host": "http://localhost:9000/",
+    "mongoUrl" : "mongodb://localhost:27017/drawing",
+    "logLevel": "silent",
+    "logLevelTest": "silly",
+    "corsWhitelist": ["http://localhost:1337"]
+}

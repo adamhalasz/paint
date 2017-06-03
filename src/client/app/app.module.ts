@@ -22,7 +22,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 // routes & components
 import { routes } from './app.routes';
 import { AppComponent } from './app.component';
-import { HomeModule } from './+home/home.module';
 import { ChangeLanguageComponent } from './change-language.component';
 
 // for AoT compilation
@@ -59,8 +58,29 @@ export function translateFactory(platformId: any, http: Http): TranslateLoader {
   return new UniversalTranslateLoader(platformId, browserLoader, './public/assets/i18n');
 }
 
+// Socket.IO
+import { SocketIoConfig, SocketIoModule } from 'ng2-socket-io';
+const socketConfig: SocketIoConfig = { url: 'http://localhost:9000', options: {} };
+
+import { UserService } from './+shared/user.service';
+import { MessengerService } from './+shared/messenger.service';
+import { SharedModule } from './+shared/shared.module';
+import { Ng2DropdownModule } from 'ng2-material-dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// Material Modules
+import {MdMenuModule} from '@angular/material';
+import {MdButtonModule} from '@angular/material';
+import {MdIconModule} from '@angular/material';
+import {MdListModule} from '@angular/material';
+import {MdDialogModule} from '@angular/material';
+import {MdTooltipModule} from '@angular/material';
+
+import 'hammerjs';
+
 @NgModule({
   imports: [
+    SharedModule,
     BrowserModule,
     HttpTransferModule.forRoot(),
     RouterModule.forRoot(routes),
@@ -89,7 +109,16 @@ export function translateFactory(platformId: any, http: Http): TranslateLoader {
         useFactory: (translateFactory),
         deps: [PLATFORM_ID, Http]
       }
-    })
+    }),
+    SocketIoModule.forRoot(socketConfig),
+    Ng2DropdownModule,
+    BrowserAnimationsModule,
+    MdMenuModule,
+    MdListModule,
+    MdIconModule,
+    MdButtonModule,
+    MdDialogModule,
+    MdTooltipModule
   ],
   // providers: [
   //   I18N_ROUTER_PROVIDERS
@@ -99,7 +128,8 @@ export function translateFactory(platformId: any, http: Http): TranslateLoader {
     ChangeLanguageComponent
   ],
   exports: [AppComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [UserService, MessengerService]
 })
 export class AppModule {
   constructor(@Inject(PLATFORM_ID) private readonly platformId: any) {

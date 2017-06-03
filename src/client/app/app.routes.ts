@@ -16,6 +16,18 @@ export const routes: Routes = [
         loadChildren: './+home/home.module#HomeModule'
       },
       {
+        path: 'login',
+        loadChildren: './+login/login.module#LoginModule'
+      },
+      {
+        path: 'signup',
+        loadChildren: './+signup/signup.module#SignupModule'
+      },
+      {
+        path: 'board',
+        loadChildren: './+board/board.module#BoardModule'
+      },
+      {
         path: 'about',
         loadChildren: './+about/about.module#AboutModule'
       }

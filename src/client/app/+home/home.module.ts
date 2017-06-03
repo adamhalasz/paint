@@ -1,5 +1,6 @@
 // angular
 import { NgModule } from '@angular/core';
+import { SharedModule } from '../+shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -12,6 +13,7 @@ import { HomeComponent } from './home.component';
 
 @NgModule({
   imports: [
+    SharedModule,
     CommonModule,
     // I18NRouterModule.forChild(routes, 'home')
     RouterModule.forChild(routes)

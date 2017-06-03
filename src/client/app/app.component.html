@@ -1,22 +1,65 @@
-<h1>
-    {{title}}
-</h1>
-<br/>
-<!--<a [routerLink]="['change-language', 'en'] | i18nRouter">English!</a>-->
-<!--<a [routerLink]="['change-language', 'tr'] | i18nRouter">Turkish!</a>-->
-<a [routerLink]="['change-language', 'en']">English!</a>
-<a [routerLink]="['change-language', 'tr']">Turkish!</a>
-<br/><br/>
-<!--<a [routerLink]="['' | i18nRouter]">Home</a>-->
-<!--<a [routerLink]="['about'] | i18nRouter">About</a>-->
-<!--<a [routerLink]="['about', 'us', 22] | i18nRouter">About us</a>-->
-<!--<a [routerLink]="['about', 'banana'] | i18nRouter">Banana Republic</a>-->
-<!--<a [routerLink]="['about', 'apple', 6, 'pear'] | i18nRouter">(apple || pear)</a>-->
-<a [routerLink]="['']">Home</a>
-<a [routerLink]="['about']">About</a>
-<a [routerLink]="['about', 'us', 22]">About us</a>
-<a [routerLink]="['about', 'banana']">Banana Republic</a>
-<a [routerLink]="['about', 'apple', 6, 'pear']">(apple || pear)</a>
-<br/><br/>
+<div id="sidebar">
+    <section id="heading">
+        <a class="link" routerLink="/" id="logo">
+            <span id="logo-icon"></span>
+            <span id="logo-text">Draw</span>
+        </a>   
+    </section> 
 
-<router-outlet></router-outlet>
+    <section id="account-missing" *ngIf="!user.loggedIn">
+        <div class="title">Account</div>
+
+        <md-list id="board-list">
+            <md-list-item class="link board-link" routerLink="/login" [routerLinkActive]="'active-link'">
+                <md-icon md-list-icon>account_circle</md-icon>Login
+            </md-list-item>
+
+            <md-list-item class="link board-link" routerLink="/signup" [routerLinkActive]="'active-link'">
+                <md-icon md-list-icon>create</md-icon>Signup
+            </md-list-item>
+        </md-list>
+    </section>  
+
+    <section id="account-loggedIn" *ngIf="user.loggedIn">
+
+        
+        <ng2-dropdown id="account-dropdown">
+            <ng2-dropdown-button id="account-dropdown-button">
+                <i class="material-icons" >account_circle</i>{{user.username}}
+            </ng2-dropdown-button>
+            <ng2-dropdown-menu [width]="2" [focusFirstElement]="false">
+                <ng2-menu-item routerLink="/" [routerLinkActive]="'active-link'" >
+                    <i class="material-icons" ng2-menu-item-icon>home</i>
+                    Home
+                </ng2-menu-item>  
+                <ng2-menu-item routerLink="/users/{{user.username}}" [routerLinkActive]="'active-link'" >
+                    <i class="material-icons" ng2-menu-item-icon>face</i>
+                    Your Profile
+                </ng2-menu-item>  
+                <ng2-menu-item  routerLink="/settings" [routerLinkActive]="'active-link'" >
+                    <i class="material-icons" ng2-menu-item-icon>settings</i>
+                    Settings
+                    </ng2-menu-item>  
+                <ng2-menu-item (click)="user.logout()">
+                    <i class="material-icons" ng2-menu-item-icon>exit_to_app</i>
+                    Logout
+                </ng2-menu-item> 
+            </ng2-dropdown-menu>
+        </ng2-dropdown>
+    </section>  
+
+    <section id="boards" *ngIf="user.loggedIn">
+        <div class="title">Boards</div>
+        <button id="create-new-board-button" md-icon-button [routerLinkActive]="'active-link'" routerLink="/board/create"><i class="material-icons" mdTooltip="Create New Board">add_circle</i></button>
+
+        <md-list id="board-list" *ngIf="user.boards">
+            <md-list-item class="link board-link" [routerLinkActive]="'active-link'" *ngFor="let board of user.boards" routerLink="/board/{{board._id}}">
+                <md-icon md-list-icon>folder</md-icon>{{board.title}}
+            </md-list-item>
+        </md-list>
+    </section>
+</div>
+<div id="content">
+    <router-outlet></router-outlet>
+</div>
+

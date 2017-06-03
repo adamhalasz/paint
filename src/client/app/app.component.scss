@@ -1,3 +1,122 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
 h1 {
   color: #14b004;
+}
+
+fieldset {
+  border: none;
+}
+
+a {
+  color: #3080ff;
+  text-decoration: none;
+}
+
+#logo {
+  display: block;
+  padding: 0 20px !important;
+  clear: both;
+  font-size: 21px;
+  font-weight: bold;
+  color: #000;
+}
+
+#logo-icon {
+  width: 64px;
+  height: 64px;
+  background: url('/assets/images/spinner.png');
+  background-position: contain;
+}
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+  overflow: auto;
+  background: #fff;
+  box-shadow: inset -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+#sidebar section {
+  position: relative;
+  padding: 10px 0;
+}
+
+#sidebar section .title {
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #545454;
+}
+
+#sidebar section .link {
+  display: block;
+  padding: 0 0;
+  clear: both;
+  outline: none;
+}
+
+#sidebar section .link:hover {
+  background: #eaf2ff;
+  box-shadow: inset -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+#sidebar section .link.active-link {
+  color: #fff;
+  background: #3080ff;
+  box-shadow: inset -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+#sidebar section .board-link {
+}
+
+#content {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 300px;
+}
+
+#sidebar #account-loggedIn {
+  padding: 0 20px;
+}
+
+#account-dropdown .ng2-dropdown-container {
+  margin: 0 20px;
+}
+
+.ng2-dropdown-container {
+}
+
+#account-dropdown-button i {
+  margin-right: 10px;
+  font-size: 16px;
+  color: #009692;
+  vertical-align: top;
+}
+
+#create-new-board-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #46c391;
+}
+
+#sidebar section .link md-icon {
+  color: #dde1e8;
+}
+
+#sidebar section .link.active-link md-icon {
+  color: #fff;
+}
+
+#boards {
+  margin-top: 20px;
 }
