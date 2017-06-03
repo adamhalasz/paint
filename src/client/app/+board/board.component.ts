@@ -37,36 +37,43 @@ export class BoardComponent implements OnInit {
         canvas.height = window.innerHeight - 84;
 
         paper.setup(canvas);
+        console.log('#paper.project', paper.project);
 
         // Dotted Line Tool
         var dottedLinePath: paper.Path;
         var dottedLineTool = new paper.Tool();
 
-        dottedLineTool.onMouseDown = function(event: any) {
+        dottedLineTool.onMouseDown = (event: any) => {
             new paper.Layer().activate();
             dottedLinePath = new paper.Path();
-            dottedLinePath.strokeColor = '#000';
+            dottedLinePath.strokeColor = '#3080ff';
             dottedLinePath.strokeWidth = 2;
-            //dottedLinePath.dashArray = [5, 8];
+            // dottedLinePath.dashArray = [5, 8];
             dottedLinePath.strokeCap = 'round';
             dottedLinePath.strokeJoin = 'round';
             dottedLinePath.add(event.point);
         };
 
-        dottedLineTool.onMouseDrag = function(event: any) {
+        dottedLineTool.onMouseDrag = (event: any) => {
             dottedLinePath.add(event.point);
         };
 
-        dottedLineTool.onMouseUp = function(event: any) {
+        dottedLineTool.onMouseUp = (event: any) => {
             dottedLinePath.smooth();
             dottedLinePath.simplify();
-        }
+            this.socket.emit('draw', {
+                boardId: this.boardId,
+                canvas: paper.project.exportJSON()
+            });
+        };
 
         this.http.get(`${this.api}/board/${this.boardId}`, { withCredentials: true}).subscribe(response => {
             // console.log('/data response', response);
             const data = response.json();
             this.board = data.board;
-
+            if (this.board.canvas) {
+                paper.project.importJSON(this.board.canvas);
+            }
             console.log('BOARD DATA', data)
         });
 

@@ -23,7 +23,12 @@ export class AboutComponent implements OnInit {
 
       this.socket.on('message', data => {
         console.log('SOCKET MESSAGE', data);
-        this.socketMessage = data;
+        this.socketMessage += data;
       });
+
   }
+
+  emit(): void {
+      this.socket.emit('message', new Date().toUTCString())
+    }
 }

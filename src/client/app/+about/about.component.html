@@ -4,6 +4,8 @@
     ANOTHER SOCKET.MESSAGE: {{socketMessage}}
 </code>
 
+<button (click)="emit()">Emit New Date</button>
+
 <ul>
     <li *ngFor="let fruit of fruits"><b>{{fruit.name}}</b> costs <u>${{fruit.price}}</u></li>
 </ul>
