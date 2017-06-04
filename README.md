@@ -1,7 +1,7 @@
 # Drawer
 A drawing application based on Angular 4 & Express 4 and MongoDb. The project has 2 parts. An Angular Universal Frontend and an Express/Mongodb based API Backend.
 
-[Drawer Angular/Express/Mongodb App Image](http://i.imgur.com/SJOen5J.png)
+![Drawer Angular/Express/Mongodb App Image](http://i.imgur.com/SJOen5J.png)
 
 ## Features
 - Login with username/password
@@ -56,11 +56,6 @@ node index.js
 
 Navigate to `http://localhost:1337` for **lean Angular** (*client-side rendering*) and `http://localhost:8000` for **Angular Universal** (*server-side rendering*) in your browser.
 
-## License
-The MIT License (MIT)
-
-Copyright (c) 2017 [Adam Halasz]
-
 ## ng-seed/spa
 This project was based on the **`ng-seed/spa`** repository. A project for Angular Universal apps following the common patterns and [best practices](https://angular.io/styleguide) in file and application organization, providing the following features:
 
@@ -105,3 +100,8 @@ This project was based on the **`ng-seed/spa`** repository. A project for Angula
 [TSLint]: https://github.com/palantir/tslint
 [codelyzer]: https://github.com/mgechev/codelyzer
 [Adam Halasz]: http://adamhalasz.com
+
+## License
+The MIT License (MIT)
+
+Copyright (c) 2017 [Adam Halasz]
