@@ -1,5 +1,5 @@
 # Drawer
-A drawing application based on Angular 4 & Express 4 and MongoDb.
+A drawing application based on Angular 4 & Express 4 and MongoDb. The project has 2 parts. An Angular Universal Frontend and an Express/Mongodb based API Backend.
 
 ## Features
 - Login with username/password
@@ -12,11 +12,11 @@ A drawing application based on Angular 4 & Express 4 and MongoDb.
 ## Prerequisites
 Packages in this seed project depend on `@angular v4.0.0`. Older versions contain outdated dependencies, might produce errors. Also, please ensure that you are using **`Typescript v2.1.6`** or higher.
 
-## Installing
+## Installing, Building and Running the Angular Frontend
 ```
 # clone the repo
 git clone https://github.com/adamhalasz/drawer.git
-cd draw
+cd drawer
 
 # use npm (or yarn) to install the dependencies
 npm install
@@ -38,6 +38,18 @@ npm run build:universal-prod
 
 # start the server (Angular Universal)
 npm run serve
+```
+
+## Installing and Running the Express API
+```
+# navigate to the api folder within the project
+cd ./src/api
+
+# use npm (or yarn) to install the dependencies
+npm install
+
+# start the api server  
+node index.js
 ```
 
 Navigate to `http://localhost:1337` for **lean Angular** (*client-side rendering*) and `http://localhost:8000` for **Angular Universal** (*server-side rendering*) in your browser.
