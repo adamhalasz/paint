@@ -1,6 +1,8 @@
 # Drawer
 A drawing application based on Angular 4 & Express 4 and MongoDb. The project has 2 parts. An Angular Universal Frontend and an Express/Mongodb based API Backend.
 
+[Drawer Angular/Express/Mongodb App Image](http://i.imgur.com/SJOen5J.png)
+
 ## Features
 - Login with username/password
 - Signup with username/password
