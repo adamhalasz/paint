@@ -1,6 +1,6 @@
 // angular
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, SimpleChanges } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { Injectable } from '@angular/core';
@@ -13,11 +13,11 @@ import * as paper from 'paper';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
   boardId: string;
   board = {} as any;
   socketMessage: string;
-  api = 'http://localhost:9000';
+  api = 'http://188.166.149.114:9000';
 
 
   constructor(
@@ -27,8 +27,24 @@ export class BoardComponent implements OnInit {
       public messenger: MessengerService,
       public router: Router) {}
 
+  ngOnDestroy(): void {
+    console.log('#Board Destroyed', this.boardId);
+    this.socket.emit('leave-board', this.boardId);
+    this.boardId = '';
+    this.board = {} as any;
+  }
   ngOnInit(): void {
-      this.activatedRoute.params.subscribe((params: Params) => {
+
+    this.activatedRoute.params.subscribe((params: Params) => {
+        console.log('#Opened Board',  params['id']);
+
+        if (this.boardId) {
+            console.log('#Leave Previous Board', this.boardId);
+            this.socket.emit('leave-board', this.boardId);
+        }
+
+        
+
         this.boardId = params['id'];
 
         console.log('boardId', this.boardId);
@@ -36,16 +52,26 @@ export class BoardComponent implements OnInit {
         canvas.width = window.innerWidth - 300;
         canvas.height = window.innerHeight - 84;
 
-        paper.setup(canvas);
-        console.log('#paper.project', paper.project);
+        /*
+        window.onresize = (event: any) => {
+            canvas.width = window.innerWidth - 300;
+            canvas.height = window.innerHeight - 84;
+            //paper.view.requestUpdate();
+        };
+        */
+
+        var paperScope = new paper.PaperScope();
+        paperScope.setup(canvas);
+        //console.log('#paper.project', paper.project);
+
 
         // Dotted Line Tool
-        var dottedLinePath: paper.Path;
-        var dottedLineTool = new paper.Tool();
+        var dottedLinePath: paperScope.Path;
+        var dottedLineTool = new paperScope.Tool();
 
         dottedLineTool.onMouseDown = (event: any) => {
-            new paper.Layer().activate();
-            dottedLinePath = new paper.Path();
+            new paperScope.Layer().activate();
+            dottedLinePath = new paperScope.Path();
             dottedLinePath.strokeColor = '#3080ff';
             dottedLinePath.strokeWidth = 2;
             // dottedLinePath.dashArray = [5, 8];
@@ -61,9 +87,10 @@ export class BoardComponent implements OnInit {
         dottedLineTool.onMouseUp = (event: any) => {
             dottedLinePath.smooth();
             dottedLinePath.simplify();
+            console.log('#Draw to Board', params['id'], this.board.title);
             this.socket.emit('draw', {
-                boardId: this.boardId,
-                canvas: paper.project.exportJSON()
+                boardId: params['id'],
+                canvas: paperScope.project.exportJSON()
             });
         };
 
@@ -72,9 +99,12 @@ export class BoardComponent implements OnInit {
             const data = response.json();
             this.board = data.board;
             if (this.board.canvas) {
-                paper.project.importJSON(this.board.canvas);
+                paperScope.project.importJSON(this.board.canvas);
             }
-            console.log('BOARD DATA', data)
+            // console.log('BOARD DATA', data)
+            console.log('#Join New Board', this.boardId);
+
+            this.socket.emit('join-board', this.boardId);
         });
 
         this.socket.on('message', data => {
@@ -82,7 +112,13 @@ export class BoardComponent implements OnInit {
             this.socketMessage = data;
         });
 
-      });
+        this.socket.on('draw-share', data => {
+            console.log('draw-share', data);
+            // if (data.boardId == this.boardId) {
+                paperScope.project.importJSON(data.canvas);
+            // }
+        });
+    });
   }
 
   delete(): void {

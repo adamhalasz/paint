@@ -17,6 +17,14 @@ class Board{
         }).catch(handleError(req, res));
     }
 
+    list(req, res, next){
+        req.data = {};
+        db.boards.find({}).sort({ createdAt: -1 }).toArray().limit(20).then(boards => {
+            req.data.boards = boards;
+            next();
+        }).catch(handleError(req,res));
+    }
+
     create(req, res){
         var data = {};
         var board = {

@@ -13,7 +13,7 @@ class Routes {
         app.get('/', home.get)
 
         // users
-        app.post('/signup', user.signup);
+        app.post('/signup', user.signup, board.authorize, user.authorizeEnd);
         app.post('/login', user.login, board.authorize, user.authorizeEnd);  
         app.post('/logout', user.logout); 
         app.delete('/user', user.isAuthenticated, user.delete); 

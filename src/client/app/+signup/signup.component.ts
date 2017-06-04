@@ -1,6 +1,7 @@
 // angular
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
+import { Router } from '@angular/router';
 import { MessengerService } from '../+shared/messenger.service';
 
 @Component({
@@ -11,9 +12,9 @@ export class SignupComponent implements OnInit {
   username: string;
   password: string;
   error: string;
-  api = 'http://localhost:9000';
+  api = 'http://188.166.149.114:9000';
 
-  constructor(public http: Http, public messenger: MessengerService) {
+  constructor(public router: Router, public http: Http, public messenger: MessengerService) {
       this.username = '';
       this.password = '';
   }
@@ -33,7 +34,9 @@ export class SignupComponent implements OnInit {
         } else {
             this.username = '';
             this.password = '';
-            this.messenger.emit('login', data.user);
+            console.log('signup data', data);
+            this.messenger.emit('login', data);
+            this.router.navigate(['']);
         }
     });
   }

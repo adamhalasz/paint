@@ -14,7 +14,7 @@ import { Socket } from 'ng2-socket-io';
 export class BoardCreateComponent implements OnInit {
   title: string;
   error: string;
-  api = 'http://localhost:9000';
+  api = 'http://188.166.149.114:9000';
 
   constructor(
       public http: Http,

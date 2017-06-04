@@ -60,7 +60,7 @@ export function translateFactory(platformId: any, http: Http): TranslateLoader {
 
 // Socket.IO
 import { SocketIoConfig, SocketIoModule } from 'ng2-socket-io';
-const socketConfig: SocketIoConfig = { url: 'http://localhost:9000', options: {} };
+const socketConfig: SocketIoConfig = { url: 'http://188.166.149.114:9000', options: {} };
 
 import { UserService } from './+shared/user.service';
 import { MessengerService } from './+shared/messenger.service';

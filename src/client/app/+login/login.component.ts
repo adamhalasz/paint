@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   password: string;
   error: string;
   user = {} as any;
-  api = 'http://localhost:9000';
+  api = 'http://188.166.149.114:9000';
 
   constructor(
       public http: Http,

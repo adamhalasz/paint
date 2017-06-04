@@ -1,40 +1,22 @@
-# ng-seed/universal
-> Please support this project by simply putting a Github star. Share this library with friends on Twitter and everywhere else you can.
+# Drawer
+A drawing application based on Angular 4 & Express 4 and MongoDb.
 
-**`ng-seed/spa`** is a seed project for Angular Universal apps following the common patterns and [best practices](https://angular.io/styleguide) in file and application organization, providing the following features:
-
-- Ready-to-go build system using [gulp] and [Webpack] for working with [TypeScript].
-- Adjustable build configuration via `json` file (`./config/build-config.json`).
-- Production and development modes.
-- [Webpack DLL]s to speed up development builds.
-- [AoT compilation] for rapid page loads on production builds (*using [@ngtools/webpack]*).
-- Tree-shaking the production builds with `harmony` branch of [UglifyJs2].
-- Hot Module Replacement with [Webpack] and [webpack-hot-middleware].
-- Both inline and external SCSS compilation.
-- Lazy loading of modules.
-- Uses [@ngx-config] for configuration management.
-- Uses [@ngx-cache] for caching.
-- Uses [@ngx-translate] and [@ngx-i18n-router] for i18n support.
-- Uses [@ngx-meta] for SEO.
-- ~Unit tests with [Jasmine] and [Karma], including code coverage via [Istanbul].~
-- ~End-to-end tests with [Protractor].~
-- [angular-tslint-rules] as configuration preset for [TSLint] and [codelyzer].
-- Managing the type definitions using @types.
-
-> Built with `@angular v4.1.0`, bundled with `gulp v4.0` and `webpack v2.5.1`.
-
-You can find the live app [here](https://ng-seed-universal.azurewebsites.net).
+## Features
+- Login with username/password
+- Signup with username/password
+- Create, read and delete boards
+- Draw to boards with a mouse
+- Drawings get saved to MongoDB
+- Drawings are broadcasted to all listening visitors in real-time
 
 ## Prerequisites
-Packages in this seed project depend on `@angular v4.0.0`. Older versions contain outdated dependencies, might produce errors.
-
-Also, please ensure that you are using **`Typescript v2.1.6`** or higher.
+Packages in this seed project depend on `@angular v4.0.0`. Older versions contain outdated dependencies, might produce errors. Also, please ensure that you are using **`Typescript v2.1.6`** or higher.
 
 ## Installing
 ```
 # clone the repo
-git clone https://github.com/ng-seed/universal.git
-cd universal-example-app
+git clone https://github.com/adamhalasz/drawer.git
+cd draw
 
 # use npm (or yarn) to install the dependencies
 npm install
@@ -63,7 +45,30 @@ Navigate to `http://localhost:1337` for **lean Angular** (*client-side rendering
 ## License
 The MIT License (MIT)
 
-Copyright (c) 2017 [Burak Tasci]
+Copyright (c) 2017 [Adam Halasz]
+
+## ng-seed/spa
+This project was based on the **`ng-seed/spa`** repository. A project for Angular Universal apps following the common patterns and [best practices](https://angular.io/styleguide) in file and application organization, providing the following features:
+
+- Ready-to-go build system using [gulp] and [Webpack] for working with [TypeScript].
+- Adjustable build configuration via `json` file (`./config/build-config.json`).
+- Production and development modes.
+- [Webpack DLL]s to speed up development builds.
+- [AoT compilation] for rapid page loads on production builds (*using [@ngtools/webpack]*).
+- Tree-shaking the production builds with `harmony` branch of [UglifyJs2].
+- Hot Module Replacement with [Webpack] and [webpack-hot-middleware].
+- Both inline and external SCSS compilation.
+- Lazy loading of modules.
+- Uses [@ngx-config] for configuration management.
+- Uses [@ngx-cache] for caching.
+- Uses [@ngx-translate] and [@ngx-i18n-router] for i18n support.
+- Uses [@ngx-meta] for SEO.
+- ~Unit tests with [Jasmine] and [Karma], including code coverage via [Istanbul].~
+- ~End-to-end tests with [Protractor].~
+- [angular-tslint-rules] as configuration preset for [TSLint] and [codelyzer].
+- Managing the type definitions using @types.
+
+> Built with `@angular v4.1.0`, bundled with `gulp v4.0` and `webpack v2.5.1`.
 
 [gulp]: http://gulpjs.com
 [Webpack]: http://webpack.github.io
@@ -85,4 +90,4 @@ Copyright (c) 2017 [Burak Tasci]
 [angular-tslint-rules]: https://github.com/fulls1z3/angular-tslint-rules
 [TSLint]: https://github.com/palantir/tslint
 [codelyzer]: https://github.com/mgechev/codelyzer
-[Burak Tasci]: http://www.buraktasci.com
+[Adam Halasz]: http://adamhalasz.com

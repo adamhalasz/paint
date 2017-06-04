@@ -10,13 +10,17 @@ import { RouterModule } from '@angular/router';
 // routes & components
 import { routes } from './home.routes';
 import { HomeComponent } from './home.component';
+import {MdGridListModule} from '@angular/material';
+
+
 
 @NgModule({
   imports: [
     SharedModule,
     CommonModule,
     // I18NRouterModule.forChild(routes, 'home')
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MdGridListModule
   ],
   declarations: [HomeComponent]
 })

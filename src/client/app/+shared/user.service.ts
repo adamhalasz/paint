@@ -13,7 +13,7 @@ export class UserService {
   username: string;
   loggedIn = false;
   boards: Array<any>;
-  api = 'http://localhost:9000';
+  api = 'http://188.166.149.114:9000';
 
   constructor(public http: Http, public messenger: MessengerService) {
     console.log('SUBSCRIBE to LOGIN...');

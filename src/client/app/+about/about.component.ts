@@ -15,13 +15,13 @@ export class AboutComponent implements OnInit {
   constructor(public http: Http, private socket: Socket) {}
 
   ngOnInit(): void {
-      this.http.get('http://localhost:1337/data').subscribe(response => {
+      this.http.get('http://localhost:1337/data').subscribe((response: any) => {
         // console.log('/data response', response);
         const data = response.json();
         this.fruits = data.fruits;
       });
 
-      this.socket.on('message', data => {
+      this.socket.on('message', (data: any) => {
         console.log('SOCKET MESSAGE', data);
         this.socketMessage += data;
       });

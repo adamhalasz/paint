@@ -7,7 +7,7 @@ class WebSocket {
         app = parent, db = parent.db;
         io = app.io = require('socket.io')(app.server);
         io.use(this.expressSession);
-        io.on('connection', this.socketHandler);
+        io.sockets.on('connection', this.socketHandler);
     }
 
 
@@ -26,7 +26,8 @@ class WebSocket {
         });
 
         socket.on('draw', function(data){
-            console.log('DRAW data', data)
+            console.log('DRAW data', data.boardId)
+            socket.broadcast.to(data.boardId.toString()).emit('draw-share', data);
             db.boards.updateOne({ 
                 _id: new mongodb.ObjectID(data.boardId)
             }, {
@@ -38,6 +39,22 @@ class WebSocket {
                     console.error(err);
                 }
             });
+        })
+
+        socket.on('draw-share', function(data){
+            console.log('## draw-share');
+            socket.emit('draw-share', data);
+        })
+
+        socket.on('join-board', function(boardId){
+            console.log('Socket Joined Board', boardId);
+            socket.join(boardId.toString());
+        })
+
+
+        socket.on('leave-board', function(boardId){
+            console.log('Socket Left Board', boardId);
+            socket.leave(boardId.toString());
         })
 
         socket.on('disconnect', () => {

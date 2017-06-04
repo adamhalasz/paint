@@ -43,7 +43,7 @@ class User {
 
     signup(req, res, next){
         console.log('SIGNUP REQUESTED', req.body);
-        var data = {};
+        req.data = {};
         if(!req.body.username || !req.body.password){
             data.ok = false;
             data.error = 'username and password are required';
@@ -54,8 +54,8 @@ class User {
             username: req.body.username
         }).then(user => {
             if(user){
-                data.ok = false;
-                data.error = 'username already exists';
+                req.data.ok = false;
+                req.data.error = 'username already exists';
                 res.json(data)
             } else {
                 db.users.insertOne({
@@ -63,10 +63,23 @@ class User {
                     password: sha256(req.body.password)
                 }).then(newUser => {
                     logger.log('debug', 'Success with db.users.insertOne:', newUser.ops[0]);
-                    data.user = newUser.ops[0];
-                    delete data.user.password;
-                    data.ok = true;
-                    res.json(data);
+                    req.data.user = newUser.ops[0];
+                    delete req.data.user.password;
+                    req.data.ok = true;
+
+                    // login
+                    req.login(req.data.user, function(err) {
+                        if (err) { 
+                            logger.error('Error with req.Login', user, err);
+                            return next(err); 
+                        } else {
+                            logger.log('debug', 'req.Login info', req.user);
+                            next();
+
+                            //res.cookie('connect.sid', randomNumber, { maxAge: 900000, httpOnly: true });
+                
+                        }
+                    });
 
                 }).catch(handleError)
             }
