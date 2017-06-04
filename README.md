@@ -1,15 +1,15 @@
-# Drawer
-A drawing application based on Angular 4 & Express 4 and MongoDb. The project has 2 parts. An Angular Universal Frontend and an Express/Mongodb based API Backend.
+# [Paint](http://paint.im/)
+A painting application based on Angular 4 & Express 4 and MongoDb. The project has 2 parts. An Angular Universal Frontend and an Express/Mongodb based API Backend.
 
-![Drawer Angular/Express/Mongodb App Image](http://i.imgur.com/SJOen5J.png)
+![Painting Angular/Express/Mongodb App Image](http://i.imgur.com/SJOen5J.png)
 
 ## Features
-- Login with username/password
-- Signup with username/password
+- Login & Signup with username/password
 - Create, read and delete boards
-- Draw to boards with a mouse
-- Drawings get saved to MongoDB
-- Drawings are broadcasted to all listening visitors in real-time
+- Paint to boards with mouse down/up events
+- Paintings get saved to MongoDB
+- Paintings are broadcasted to all listening visitors in real-time
+- Browser latest Boards and Users
 
 ## Prerequisites
 Packages in this seed project depend on `@angular v4.0.0`. Older versions contain outdated dependencies, might produce errors. Also, please ensure that you are using **`Typescript v2.1.6`** or higher.
